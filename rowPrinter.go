@@ -6,12 +6,7 @@ func RowPrinter(splitInput []string, alignment string, sourceFile []byte, f func
 	fullRowData := ""
 	rowlength := Findsize() - 2
 	rowlength2 := 1
-	extraspaces := ""
-	if alignment == "--align=justify" {
-		for i := 0; i < rowlength2; i++ {
-			
-		}
-	}
+	
 	for _, singleLine := range splitInput { // to print one line at a time
 		if singleLine != "" {
 			for i := 2; i < 10; i++ { // to print 8 lines of each character
@@ -40,7 +35,25 @@ func RowPrinter(splitInput []string, alignment string, sourceFile []byte, f func
 				fmt.Print(fullRowData)
 				fullRowData = ""
 				fmt.Println("|")
-			} 
+			}
+			 if alignment == "--align=justify" {
+				finalinput := ""
+				extraspaces := ""
+		lengthofwords := 0
+		count := 0
+		for _, word := range splitInput {
+			lengthofwords = len(word) + lengthofwords
+			count++
+		}
+		lengthbetweenwords := (rowlength - lengthofwords) / count
+		for _, word := range splitInput {
+			for i := 0; i < lengthbetweenwords; i++ {
+				extraspaces = extraspaces + " "
+			}
+			finalinput = finalinput + extraspaces + word
+			extraspaces = ""
+		}
+			 }  	
 		if alignment == "--align=center" {
 			fmt.Print("|")
 			rowlength2 = (rowlength - len(fullRowData)) / 2
