@@ -16,13 +16,12 @@ func RowPrinterjustify(splitInput []string, alignment string, sourceFile []byte,
 					charRowData := f(sourceFile, rowLocation)
 					if (charRune == 32) && i == 2 {
 						numberofwords++
-					}
-					if i == 2 && charRune != 32 {
+					}                                          // Calculate number of words and length of words used to find the lengthbetweenwords
+					if i == 2 && charRune != 32 {              // to fit the terminal
 						lengthofwords += len(charRowData)
 					}
 				}
 			}
-
 			if numberofwords == 0 {
 				numberofwords++
 			}

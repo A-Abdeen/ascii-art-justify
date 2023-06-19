@@ -9,7 +9,7 @@ import (
 func main() {
 	// Check if input is correct
 	if len(os.Args) != 4 {
-		fmt.Print("\nThis project requires the use of three arguments in order.\nCorrect format: go run . [OPTION] [STRING] [BANNER]\n\n")
+		fmt.Print("\nCorrect format: go run . [OPTION] [STRING] [BANNER]\n\nExample: go run . --align=right  something  standard\n\n")
 		return
 	}
 	alignment := os.Args[1]
@@ -38,4 +38,4 @@ func main() {
 	// Main function: Printing (printing the row of characters within input string)
 	// ∟--> Sub function: Parsing (parsing the data of the 8 rows to print sequentially)
 	asciiart.RowPrinter(splitInput, alignment, sourceFile, asciiart.RowParser)
-	}
+}
