@@ -8,13 +8,29 @@ import (
 
 func main() {
 	// Check if input is correct
-	if len(os.Args) != 4 {
-		fmt.Print("\nThis project requires the use of three arguments in order.\nCorrect format: go run . [OPTION] [STRING] [BANNER]\n\n")
+	var rawInput string
+	file := "standard"
+	alignment := ""
+	outputErr := "\nUsage: go run . [OPTION] [STRING] [BANNER]\n\nExample: go run . --align=right something standard\n\n"
+	if len(os.Args) == 2 { // [STRING]
+		rawInput = os.Args[1]
+	} else if len(os.Args) == 3 { // [STRING] [BANNER]
+		rawInput = os.Args[1]
+		file = os.Args[2]
+	} else if len(os.Args) == 4 { // [OPTION] [STRING] [BANNER]
+		if os.Args[1][:8] == "--align=" {
+			alignment = os.Args[1]
+		} else {
+			fmt.Print(outputErr)
+			return
+		}
+		rawInput = os.Args[2]
+		file = os.Args[3]
+	} else { // ERROR (FOR OUTPUT USE)
+		fmt.Print(outputErr)
 		return
 	}
-	alignment := os.Args[1]
-	rawInput := os.Args[2]
-	file := os.Args[3]
+	// Banner Loader
 	switch {
 	case file == "standard":
 		file = "standard.txt"
@@ -38,4 +54,4 @@ func main() {
 	// Main function: Printing (printing the row of characters within input string)
 	// ∟--> Sub function: Parsing (parsing the data of the 8 rows to print sequentially)
 	asciiart.RowPrinter(splitInput, alignment, sourceFile, asciiart.RowParser)
-	}
+}

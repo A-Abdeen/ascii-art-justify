@@ -1,13 +1,12 @@
 package asciiart
 
-
 import (
-	"os"
 	"log"
+	"os"
 	"os/exec"
 )
 
-func Findsize() int{
+func FindSize() int {
 	cmd := exec.Command("stty", "size")
 	cmd.Stdin = os.Stdin
 	rowlength := 1
@@ -16,10 +15,10 @@ func Findsize() int{
 		if string(out[i]) == " " {
 			rowlength = TrimAto(string(out[i:]))
 			break
-		} 
+		}
 	}
 	if err != nil {
-	  log.Fatal(err)
+		log.Fatal(err)
 	}
 	return rowlength
 }
